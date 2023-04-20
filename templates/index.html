@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <link href="static/app.css" rel="stylesheet" type="text/css">
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+
+    <div class="wrapper">
+
+      <header>
+        <a href="#" id="english">English</a>
+        <a href="#" id="portuguese">Portuguese</a>
+      </header>
+
+      <section class="main-controls">
+
+        <canvas class="visualizer" height="60px"></canvas>
+        <div id="buttons">
+          <button class="record">Record</button>
+          <button class="stop">Stop</button>
+        </div>
+      </section>
+
+      <section class="sound-clips">
+      </section>
+      <div id="transcription"></div>
+      <div id="chat-dialog"></div>
+
+    </div>
+    <script src="static/app.js"></script>
+
+  </body>
+</html>
