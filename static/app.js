@@ -17,6 +17,8 @@ const mainSection = document.querySelector('.main-controls');
 const englishLink = document.querySelector('#english');
 const portugueseLink = document.querySelector('#portuguese');
 
+
+
 englishLink.addEventListener('click', (event) => {
   event.preventDefault();
   document.cookie = 'lang=en';
@@ -30,9 +32,9 @@ portugueseLink.addEventListener('click', (event) => {
 });
 
 const synth = window.speechSynthesis;
-
+let voice;
 async function getVoices() {
-  const synth = window.speechSynthesis;
+  
   await new Promise(resolve => synth.onvoiceschanged = resolve);
   return synth.getVoices();
 }
@@ -41,7 +43,7 @@ async function init() {
   const voices = await getVoices();
   console.log(getCookieValue('lang'));
   const lang = getCookieValue('lang');
-  let voice;
+
   if (lang === 'en') {
     voice = voices.find(voice => voice.lang.startsWith('en'));
   } else if (lang === 'pt') {
@@ -176,10 +178,10 @@ async function init() {
                   Transcription.appendChild(whatever2);
 
 
-                  const utterance = new SpeechSynthesisUtterance(data.result);
+                  let utterance = new SpeechSynthesisUtterance(data.result);
                   utterance.voice = voice
                   synth.speak(utterance);
-                  
+
 
                 })
                 .then(() => {
@@ -255,8 +257,8 @@ async function init() {
                   whatever2.innerHTML = data.result
                   Transcription.appendChild(whatever2);
 
-                  
-                  const utterance = new SpeechSynthesisUtterance(data.result);
+
+                  let utterance = new SpeechSynthesisUtterance(data.result);
                   utterance.voice = voice
                   synth.speak(utterance);
 
