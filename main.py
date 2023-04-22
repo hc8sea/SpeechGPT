@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, g
 import librosa
 import numpy as np
 from io import BytesIO
@@ -9,6 +9,11 @@ import openai
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
+
+@app.before_first_request
+def create_variable():
+    global model
+    model = whisper.load_model("base")
 
 @app.route('/')
 def index():
@@ -34,7 +39,7 @@ def upload_audio():
         f.write(virtual_file.getbuffer())
     
 
-    model = whisper.load_model("base")
+    # model = whisper.load_model("base")
     result = model.transcribe(file_path)
     print(result["text"])
 

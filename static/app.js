@@ -17,7 +17,9 @@ const mainSection = document.querySelector('.main-controls');
 const englishLink = document.querySelector('#english');
 const portugueseLink = document.querySelector('#portuguese');
 
-
+if (!document.cookie.includes('lang=')) {
+  document.cookie = 'lang=en';
+}
 
 englishLink.addEventListener('click', (event) => {
   event.preventDefault();
