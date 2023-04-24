@@ -7,6 +7,7 @@ from scipy.io import wavfile
 import pydub
 import openai
 from whisper_jax import FlaxWhisperPipline
+import jax.numpy as jnp
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -16,7 +17,7 @@ def create_variable():
     global model
 #    model = whisper.load_model("base")
     global pipeline
-    pipeline = FlaxWhisperPipline("openai/whisper-base")
+    pipeline = FlaxWhisperPipline("openai/whisper-base", dtype=jnp.float16, batch_size=16)
 
 @app.route('/')
 def index():
