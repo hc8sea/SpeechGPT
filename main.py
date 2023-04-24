@@ -6,6 +6,7 @@ import whisper
 from scipy.io import wavfile
 import pydub
 import openai
+from whisper_jax import FlaxWhisperPipline
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -13,7 +14,9 @@ app.secret_key = 'your-secret-key'
 @app.before_first_request
 def create_variable():
     global model
-    model = whisper.load_model("base")
+#    model = whisper.load_model("base")
+    global pipeline
+    pipeline = FlaxWhisperPipline("openai/whisper-base")
 
 @app.route('/')
 def index():
@@ -26,9 +29,6 @@ def upload_audio():
     audio_file = request.files['audioFile'].read()
 
 
-    # # Specify the file path and name where you want to save the WAV file
-    # file_path = 'file.mp3'
-
     virtual_file = BytesIO(audio_file)
 
     # Create a file path string that points to the virtual file
@@ -39,8 +39,9 @@ def upload_audio():
         f.write(virtual_file.getbuffer())
     
 
-    # model = whisper.load_model("base")
-    result = model.transcribe(file_path)
+    
+#    result = model.transcribe(file_path)
+    result = pipeline(file_path)
     print(result["text"])
 
     return jsonify(result)
