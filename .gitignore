@@ -1,6 +1,7 @@
 credentials.py
 Dockerfile_folder/
 venv_old/
+node_modules/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
