@@ -65,9 +65,9 @@ def llm():
     print(started)
     if not started:
         if session['lang'] == 'en':
-            first_message = "You will read a piece of information and then ask me if I need assistance."
+            first_message = "Hello, how can I help you?"
         elif session['lang'] == 'pt':
-            first_message = "Eu irei te dizer algo e você irá me perguntar se eu preciso de alguma ajuda."
+            first_message = "Olá, como posso ajudar?"
         messages = [
             {"role": "system", "content": first_message},
             {"role": "user", "content": audio_input}
